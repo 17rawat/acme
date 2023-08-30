@@ -1,8 +1,11 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut, mutate } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import EditableField from "@/components/EditUserDetails";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Account = () => {
   const { data: session } = useSession();
@@ -12,6 +15,25 @@ const Account = () => {
   const handleLogout = async () => {
     await signOut({ redirect: false });
     router.push("/");
+  };
+
+  const handleChange = async (field, newValue) => {
+    try {
+      const loadingToastId = toast.loading(`Updating ${field}...`);
+      const response = await axios.patch("/api/update-user", {
+        userId: session?.user?.id,
+        field,
+        value: newValue,
+      });
+
+      toast.dismiss(loadingToastId);
+
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.dismiss(loadingToastId);
+
+      toast.error(error.response.data.message);
+    }
   };
 
   return (
@@ -47,6 +69,24 @@ const Account = () => {
           Back to collection
         </Link>
       </section>
+
+      <div className="border rounded p-4 mb-4">
+        <EditableField
+          label="Name"
+          field="name"
+          value={session?.user?.name || ""}
+          onSave={handleChange}
+        />
+
+        <hr className="my-4" />
+
+        <EditableField
+          label="Email"
+          field="email"
+          value={session?.user?.email || ""}
+          onSave={handleChange}
+        />
+      </div>
     </div>
   );
 };

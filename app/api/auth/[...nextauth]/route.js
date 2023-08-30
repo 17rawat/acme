@@ -47,7 +47,7 @@ export const authOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user, session, trigger }) {
+    async jwt({ token, user, session }) {
       if (user) {
         return {
           ...token,
