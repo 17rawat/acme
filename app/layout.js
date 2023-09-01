@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 
 import CartProvider from "@/store/cartProvider";
 
+import { SessionProvider } from "next-auth/react";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -18,16 +20,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthContextProvider>
-          <ToasterContext />
-          <CartProvider>
+        <CartProvider>
+          <AuthContextProvider>
+            <ToasterContext />
             <div className="flex flex-col min-h-screen">
               <Header />
               <main>{children}</main>
               <Footer />
             </div>
-          </CartProvider>
-        </AuthContextProvider>
+          </AuthContextProvider>
+        </CartProvider>
       </body>
     </html>
   );

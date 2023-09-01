@@ -17,21 +17,24 @@ const Account = () => {
     router.push("/");
   };
 
-  const handleChange = async (field, newValue) => {
+  const handleChange = async (field, oldPassword, newValue) => {
+    const loadingToastId = toast.loading(`Updating ${field}...`);
     try {
-      const loadingToastId = toast.loading(`Updating ${field}...`);
       const response = await axios.patch("/api/update-user", {
         userId: session?.user?.id,
         field,
         value: newValue,
+        oldPassword,
       });
+
+      // console.log(response);
 
       toast.dismiss(loadingToastId);
 
       toast.success(response.data.message);
     } catch (error) {
       toast.dismiss(loadingToastId);
-
+      // console.log(error.response.data.message);
       toast.error(error.response.data.message);
     }
   };
@@ -84,6 +87,15 @@ const Account = () => {
           label="Email"
           field="email"
           value={session?.user?.email || ""}
+          onSave={handleChange}
+        />
+
+        <hr className="my-4" />
+
+        <EditableField
+          label="Password"
+          field="password"
+          value="The password is not shown for security reasons"
           onSave={handleChange}
         />
       </div>

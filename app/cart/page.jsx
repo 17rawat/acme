@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import CartItem from "@/components/CartItem";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { FaRupeeSign } from "react-icons/fa";
@@ -15,7 +14,7 @@ const Cart = () => {
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
-  const handleSubscription = async () => {
+  const handleCheckout = async () => {
     setIsCheckingOut(true);
 
     try {
@@ -24,6 +23,7 @@ const Cart = () => {
       });
 
       // setIsCheckingOut(false);
+
       window.location.assign(data);
     } catch (error) {
       setIsCheckingOut(false);
@@ -35,7 +35,7 @@ const Cart = () => {
     <div className="space-y-4">
       {cartItems.map((item) => (
         <CartItem
-          key={item.id}
+          key={item.id && item.size}
           id={item.id}
           name={item.name}
           price={item.price}
@@ -65,7 +65,7 @@ const Cart = () => {
           <div className="md:col-span-2">{itemInCart}</div>
 
           {cartItems.length > 0 && (
-            <div className="md:col-span-1 border p-4 h-64 ">
+            <div className="md:col-span-1 border p-4 md:h-64">
               <div className="mb-4">
                 <h3 className="text-lg font-semibold">Order Summary</h3>
               </div>
@@ -97,7 +97,7 @@ const Cart = () => {
                   </span>
                 </div>
                 <button
-                  onClick={handleSubscription}
+                  onClick={handleCheckout}
                   className={`${
                     isCheckingOut
                       ? "bg-green-500"
