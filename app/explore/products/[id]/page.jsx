@@ -7,7 +7,11 @@ import { addItemToCart } from "@/store/cartSlice";
 import { useDispatch } from "react-redux";
 import { FaRupeeSign } from "react-icons/fa";
 
+import { useSession } from "next-auth/react";
+
 const Product = ({ params }) => {
+  const { data: session } = useSession();
+  console.log(session);
   const dispatch = useDispatch();
   const [selectedSize, setSelectedSize] = useState("");
 
@@ -25,18 +29,19 @@ const Product = ({ params }) => {
     dispatch(addItemToCart({ id, name, price, selectedSize }));
   };
 
+  console.log(product.imageSrc);
   return (
     <div className="flex flex-col md:flex-row m-4">
-      <div className="flex-shrink-0 md:mr-10 mb-4 md:mb-0">
+      <div className="w-96 h-96 overflow-hidden shadow-md">
         {product && product.imageSrc && product.imageSrc.src && (
           <Image
-            src={product.imageSrc.src}
+            src={product.imageSrc}
             alt={product.name}
-            width={400}
-            height={400}
+            className="w-full h-full object-cover"
           />
         )}
       </div>
+
       <div className="ml-4 ">
         <h1 className="text-xl font-bold mb-2">{product?.name}</h1>
         <p className="text-gray-600">{product?.description}</p>
@@ -63,15 +68,18 @@ const Product = ({ params }) => {
             </li>
           ))}
         </ul>
-        <button
-          className={`mt-4 bg-black text-white px-4 py-2 rounded-md hover:bg-blue-600 ${
-            !selectedSize && "cursor-not-allowed opacity-50"
-          }`}
-          disabled={!selectedSize}
-          onClick={handleAddToCart}
-        >
-          Add to Cart
-        </button>
+
+        {session && (
+          <button
+            className={`mt-4 bg-black text-white px-4 py-2 rounded-md hover:bg-blue-600 ${
+              !selectedSize && "cursor-not-allowed opacity-50 "
+            }`}
+            disabled={!selectedSize}
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </button>
+        )}
       </div>
     </div>
   );

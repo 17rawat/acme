@@ -20,16 +20,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <CartProvider>
-          <AuthContextProvider>
+        <AuthContextProvider>
+          <CartProvider>
             <ToasterContext />
             <div className="flex flex-col min-h-screen">
               <Header />
               <main>{children}</main>
               <Footer />
             </div>
-          </AuthContextProvider>
-        </CartProvider>
+          </CartProvider>
+        </AuthContextProvider>
       </body>
     </html>
   );
