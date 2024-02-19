@@ -4,11 +4,11 @@ import { FaRupeeSign } from "react-icons/fa";
 
 const ProductCard = ({ product }) => (
   <Fragment>
-    <div className="border border-gray-300">
+    <div>
       <Image
         src={product.imageSrc}
         alt={product.imageAlt}
-        className="w-96 h-96 object-cover"
+        className=" w-96 h-96 object-cover"
       />
     </div>
     <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>

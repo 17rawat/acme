@@ -8,8 +8,17 @@ import { useSession } from "next-auth/react";
 
 import { useSelector } from "react-redux";
 
+import { usePathname } from "next/navigation";
+
 const Header = () => {
   const { data: session } = useSession();
+
+  const pathname = usePathname();
+
+  // console.log(pathname);
+
+  const isAuthPage =
+    pathname === "/account/login" || pathname === "/account/register";
 
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
 
@@ -21,11 +30,11 @@ const Header = () => {
         </Link>
 
         <ul className="flex space-x-6">
-          {!session && (
+          {!session && !isAuthPage && (
             <li>
               <Link
                 href="/account/login"
-                className="text-white bg-black border border-gray-300 px-4 py-2 rounded"
+                className="text-white rounded rounded-md bg-black border border-gray-300 px-4 py-2"
               >
                 login
               </Link>

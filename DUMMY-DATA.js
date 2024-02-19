@@ -4,8 +4,8 @@ import tshirtNorth from "@/assets/tshirt-north.webp";
 import tshirtEU from "@/assets/tshirt-eu.webp";
 import yellow_hoodie from "@/assets/yellow_hoodie.jpeg";
 import black_women_hoodie from "@/assets/black_women_hoodie.jpeg";
-
 import biege_hoodie from "@/assets/biege_hoodie.jpeg";
+import brown_hoodie from "@/assets/brown_hoodie.jpeg";
 
 const Products = [
   {
@@ -15,7 +15,6 @@ const Products = [
     price: 2100,
     sizes: ["S", "M", "L", "XL"],
 
-    colors: ["White", "Black"],
     imageSrc: hoodeiAfrica,
 
     imageAlt: "Hoodie Africa",
@@ -26,7 +25,7 @@ const Products = [
     description: "Stay warm with this South America themed hoodie.",
     price: 2100,
     sizes: ["S", "M", "L", "XL"],
-    colors: ["White", "Black"],
+
     imageSrc: hoodeiSouthAmerica,
 
     imageAlt: "Hoodie South America",
@@ -37,7 +36,7 @@ const Products = [
     description: "Show your European pride with this stylish t-shirt.",
     price: 1200,
     sizes: ["XS", "S", "M", "L"],
-    colors: ["White", "Black"],
+
     imageSrc: tshirtEU,
 
     imageAlt: "Tshirt EU",
@@ -48,7 +47,7 @@ const Products = [
     description: "Represent the Northern Hemisphere with this classic t-shirt.",
     price: 1200,
     sizes: ["S", "M", "L"],
-    colors: ["White", "Black"],
+
     imageSrc: tshirtNorth,
 
     imageAlt: "Tshirt North",
@@ -60,7 +59,7 @@ const Products = [
     description: "Explore comfort and style with this Asia-themed hoodie.",
     price: 2200,
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Blue", "Red"],
+
     imageSrc: yellow_hoodie,
     imageAlt: "Hoodie Yellow",
   },
@@ -70,7 +69,7 @@ const Products = [
     description: "Show your love for South America with this Hoodie.",
     price: 2100,
     sizes: ["XS", "S", "M", "L"],
-    colors: ["Green", "Yellow"],
+
     imageSrc: black_women_hoodie,
     imageAlt: "Women Hoodie",
   },
@@ -81,9 +80,19 @@ const Products = [
     description: "Show your love for South America with this Hoodie.",
     price: 1800,
     sizes: ["XS", "S", "M", "L"],
-    colors: ["Green", "Yellow"],
+
     imageSrc: biege_hoodie,
     imageAlt: "Men Biege Hoodie",
+  },
+
+  {
+    id: 8,
+    name: " Women Brown Hoodie",
+    description: "Stay warm in style with this classic brown hoodie.",
+    price: 1900,
+    sizes: ["S", "M", "L", "XL"],
+    imageSrc: brown_hoodie,
+    imageAlt: "Brown Hoodie",
   },
 ];
 

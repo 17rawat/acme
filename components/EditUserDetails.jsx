@@ -19,15 +19,17 @@ const EditableField = ({ label, field, value, onSave }) => {
       }
 
       onSave(field, oldPassword, newPassword);
-      setOldPassword("");
-      setNewPassword("");
-      setConfirmPassword("");
+      // setOldPassword("");
+      // setNewPassword("");
+      // setConfirmPassword("");
     } else {
-      setEditedValue("");
-      onSave(field, editedValue);
+      onSave(field, value, editedValue);
+      // setEditedValue("");
     }
     setIsEditing(false);
   };
+
+  // console.log(editedValue);
 
   const handleCancel = () => {
     setIsEditing(false);

@@ -1,7 +1,7 @@
 "use client";
 
-import { useSession, signOut, mutate } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
+
 import Link from "next/link";
 import EditableField from "@/components/EditUserDetails";
 import axios from "axios";
@@ -10,11 +10,8 @@ import toast from "react-hot-toast";
 const Account = () => {
   const { data: session } = useSession();
 
-  const router = useRouter();
-
   const handleLogout = async () => {
-    await signOut({ redirect: false });
-    router.push("/");
+    await signOut({ redirect: "/" });
   };
 
   const handleChange = async (field, oldPassword, newValue) => {
@@ -27,12 +24,13 @@ const Account = () => {
         oldPassword,
       });
 
-      // console.log(response);
-
       toast.dismiss(loadingToastId);
 
       toast.success(response.data.message);
+
+      await signOut({ redirect: "/" });
     } catch (error) {
+      console.log(error);
       toast.dismiss(loadingToastId);
       // console.log(error.response.data.message);
       toast.error(error.response.data.message);

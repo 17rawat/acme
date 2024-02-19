@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 const PATCH = async (req) => {
   const { field, value, userId, oldPassword } = await req.json();
 
-  //   console.log(field, value, userId);
+  // console.log(field, value, userId);
   const updatedFields = {};
 
   if (field === "password") {
