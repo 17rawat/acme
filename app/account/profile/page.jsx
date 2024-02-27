@@ -12,6 +12,7 @@ const Account = () => {
 
   const handleLogout = async () => {
     await signOut({ redirect: "/" });
+    toast.success("Logged Out Successfully");
   };
 
   const handleChange = async (field, oldPassword, newValue) => {

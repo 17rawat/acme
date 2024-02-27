@@ -22,6 +22,7 @@ const Hero = () => {
           Explore products
         </Link>
       </div>
+
       <Image
         src={hero}
         loading="eager"

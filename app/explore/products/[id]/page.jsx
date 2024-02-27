@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Products from "@/DUMMY-DATA";
 import Image from "next/image";
 import { addItemToCart } from "@/store/cartSlice";
@@ -11,7 +11,7 @@ import { useSession } from "next-auth/react";
 
 const Product = ({ params }) => {
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
   const dispatch = useDispatch();
   const [selectedSize, setSelectedSize] = useState("");
 
@@ -29,12 +29,15 @@ const Product = ({ params }) => {
     dispatch(addItemToCart({ id, name, price, selectedSize }));
   };
 
-  console.log(product.imageSrc);
+  // console.log(product.imageSrc);
   return (
-    <div className="flex flex-col md:flex-row m-4">
-      <div className="w-96 h-96 overflow-hidden shadow-md">
+    <div className="flex flex-col md:flex-row m-10 items-center justify-center">
+      <div className="w-96 h-96 ">
         {product && product.imageSrc && product.imageSrc.src && (
           <Image
+            loading="eager"
+            priority={true}
+            quality={90}
             src={product.imageSrc}
             alt={product.name}
             className="w-full h-full object-cover"

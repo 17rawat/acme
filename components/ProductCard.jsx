@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => (
       <Image
         src={product.imageSrc}
         alt={product.imageAlt}
-        className=" w-96 h-96 object-cover"
+        className=" w-80 h-80 object-cover"
       />
     </div>
     <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
