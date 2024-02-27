@@ -7,7 +7,9 @@ import Footer from "@/components/Footer";
 
 import CartProvider from "@/store/cartProvider";
 
-import { SessionProvider } from "next-auth/react";
+import { Suspense } from "react";
+
+import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +27,9 @@ export default function RootLayout({ children }) {
             <ToasterContext />
             <div className="flex flex-col min-h-screen">
               <Header />
-              <main>{children}</main>
+              <Suspense fallback={<Loading />}>
+                <main>{children}</main>
+              </Suspense>
               <Footer />
             </div>
           </CartProvider>
